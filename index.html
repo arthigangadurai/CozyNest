@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CozyNest | Verified sanctuary stays across India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0; --card:#fff; --soft:#efece4; --ink:#17201b; --muted:#5d6661;
+  --line:#e2ded3; --green:#0e3b29; --green-2:#1d5a3f; --mint:#dcefe3;
+  --radius:18px; --max:1200px; --shadow:0 12px 40px rgba(14,59,41,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--green-2);outline-offset:2px;border-radius:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-2)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 22px;font-weight:600;border:1px solid transparent;transition:background .15s}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-2)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{background:var(--soft)}
+.btn-sm{padding:9px 16px;font-size:14px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(247,245,240,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--green)}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--green);display:grid;place-items:center;color:#fff}
+nav.main{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:500}
+nav.main a:hover{color:var(--green-2)}
+.top-r{display:flex;align-items:center;gap:12px}
+.who{font-size:14px;font-weight:600;color:var(--green)}
+.menu-btn{display:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-weight:600}
+
+/* hero */
+.hero{padding:56px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+h1{font-size:56px;line-height:1.05;letter-spacing:-.03em;margin:16px 0 18px;font-weight:800}
+.lead{font-size:18px;color:var(--muted);max-width:520px;margin:0 0 26px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
+.hero-stats b{display:block;font-size:22px}
+.hero-stats span{font-size:13px;color:var(--muted)}
+
+.signup{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:30px}
+.signup h2{margin:0 0 6px;font-size:24px;letter-spacing:-.01em}
+.signup>p{margin:0 0 22px;color:var(--muted);font-size:15px}
+.signed{display:none}
+.signed.on{display:block}
+.signed-in-msg{background:var(--mint);border-radius:14px;padding:18px;color:var(--green)}
+.signed-in-msg b{display:block;font-size:18px;margin-bottom:4px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:14px;font-weight:600}
+.field input,.field select{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff;font-size:16px;width:100%}
+.field input:focus,.field select:focus{outline:2px solid var(--green-2);outline-offset:0;border-color:transparent}
+.field .err{display:none;color:#a33a2b;font-size:13px}
+.field.bad input,.field.bad select{border-color:#a33a2b}
+.field.bad .err{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.signup .btn{width:100%;padding:15px;margin-top:6px}
+.fine{font-size:12.5px;color:var(--muted);margin:14px 0 0;text-align:center}
+.status{font-size:14.5px;min-height:22px;margin:12px 0 0;text-align:center}
+.status.ok{color:var(--green-2)}
+.status.fail{color:#a33a2b}
+
+/* search strip */
+.search{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.4fr 1fr 1fr auto;align-items:center;padding:8px}
+.search div{padding:10px 22px;border-right:1px solid var(--line)}
+.search div:last-of-type{border-right:0}
+.search small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.search span{font-weight:600;font-size:15px}
+
+/* chips */
+.chips{display:flex;gap:10px;overflow-x:auto;padding:22px 0 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+
+section.block{padding:56px 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+h2.sec{font-size:36px;letter-spacing:-.02em;margin:8px 0 0;font-weight:800;line-height:1.15}
+.head p{margin:0;color:var(--muted);max-width:460px}
+
+/* stays */
+.stays{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.stay{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.stay:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.pic{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#cfe0d4,#8fb39c);overflow:hidden}
+.pic.b{background:linear-gradient(135deg,#e7d6b8,#b98f58)}
+.pic.c{background:linear-gradient(135deg,#c4d3e0,#6f8fa6)}
+.pic.d{background:linear-gradient(135deg,#e4c5b0,#a3614a)}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.95);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;z-index:1}
+.save{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.95);font-size:16px;display:grid;place-items:center;z-index:1}
+.save[aria-pressed="true"]{color:#c0392b}
+.stay .body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.stay .row{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:15px}
+.stay .row span:last-child{font-weight:500;font-size:14px}
+.stay h3{margin:4px 0 2px;font-size:16px;font-weight:600;line-height:1.35}
+.stay p{margin:0;color:var(--muted);font-size:14px}
+.stay .foot{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.stay .price b{font-size:18px}
+.stay .price{font-size:14px}
+
+/* destinations */
+.dests{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.dest{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;color:#fff;background:linear-gradient(160deg,#2f6b4f,#0e3b29);display:flex;align-items:flex-end;padding:16px}
+.dest:nth-child(2){background:linear-gradient(160deg,#8a6a3e,#4c3a1d)}
+.dest:nth-child(3){background:linear-gradient(160deg,#4b7b8a,#1f3d47)}
+.dest:nth-child(4){background:linear-gradient(160deg,#c06d4b,#6e3a24)}
+.dest:nth-child(5){background:linear-gradient(160deg,#2a5d7d,#132e40)}
+.dest:nth-child(6){background:linear-gradient(160deg,#7a8f3d,#3d4a1d)}
+.dest::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 60%)}
+.dest div{position:relative;z-index:1}
+.dest b{display:block;font-size:17px}
+.dest small{opacity:.85;font-size:13px}
+
+/* guarantee */
+.guar{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.g-ic{width:48px;height:48px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+.g-card h3{margin:0 0 8px;font-size:19px;font-weight:700}
+.g-card p{margin:0;color:var(--muted);font-size:15px}
+
+/* host */
+.host{background:var(--green);color:#fff;border-radius:28px;padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.host h2{font-size:38px;line-height:1.15;margin:12px 0 12px;letter-spacing:-.02em}
+.host p{margin:0 0 22px;color:#d6e6dc;font-size:17px;max-width:540px}
+.host .btn{background:#fff;color:var(--green)}
+.earn{background:#fff;color:var(--ink);border-radius:20px;padding:24px}
+.earn small{color:var(--muted)}
+.earn b{display:block;font-size:34px;margin:4px 0 12px}
+.bar{height:8px;border-radius:8px;background:var(--soft);overflow:hidden}
+.bar span{display:block;height:100%;width:78%;background:var(--green-2)}
+
+/* dialogs */
+dialog{border:0;border-radius:var(--radius);padding:0;width:min(460px,calc(100vw - 32px));box-shadow:0 20px 60px rgba(0,0,0,.25);background:#fff;color:var(--ink)}
+dialog::backdrop{background:rgba(20,25,22,.5)}
+.dlg{padding:26px}
+.dlg h2{margin:0 0 4px;font-size:22px;font-weight:700}
+.dlg>p{margin:0 0 18px;color:var(--muted);font-size:14.5px}
+.dlg .row{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin-top:6px}
+.summary{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.summary b{font-weight:700}
+.ref{font-size:14px;margin-top:10px}
+
+footer{background:#fff;border-top:1px solid var(--line);padding:56px 0 28px;margin-top:40px}
+.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.fgrid h5{margin:0 0 14px;font-size:15px;font-weight:700}
+.fgrid a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:10px}
+.fgrid a:hover{color:var(--ink)}
+.legal{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+/* responsive */
+@media (max-width:1040px){
+  h1{font-size:46px}
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .stays{grid-template-columns:repeat(2,1fr)}
+  .dests{grid-template-columns:repeat(3,1fr)}
+  .host{grid-template-columns:1fr;padding:40px}
+  .search{grid-template-columns:1fr 1fr;border-radius:24px}
+  .search div{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:820px){
+  nav.main{display:none}
+  .menu-btn{display:inline-block}
+  nav.main.open{display:flex;flex-direction:column;align-items:flex-start;position:absolute;top:72px;left:0;right:0;background:var(--bg);padding:16px 24px;border-bottom:1px solid var(--line)}
+  .guar{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  h2.sec{font-size:30px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  h1{font-size:36px}
+  .lead{font-size:16px}
+  .hero{padding:32px 0 24px}
+  .signup{padding:22px}
+  .stays{grid-template-columns:1fr}
+  .dests{grid-template-columns:1fr 1fr;gap:12px}
+  .dest{aspect-ratio:4/5}
+  .search{grid-template-columns:1fr;border-radius:20px}
+  .search div{border-bottom:1px solid var(--line)}
+  .host{padding:28px 22px}
+  .host h2{font-size:28px}
+  .fgrid{grid-template-columns:1fr}
+  .who{display:none}
+  .row2{grid-template-columns:1fr}
+  .hero-stats{gap:18px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#"><span class="logo-mark" aria-hidden="true">⌂</span>CozyNest</a>
+    <nav class="main" id="mainNav" aria-label="Primary">
+      <a href="#stays">Stays</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#guarantee">Guarantee</a>
+      <a href="#host">Become a Host</a>
+    </nav>
+    <div class="top-r">
+      <span class="who" id="whoLabel"></span>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" type="button">Menu</button>
+      <a class="btn btn-ghost btn-sm" href="#signup" id="joinLink">Sign in</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Verified sanctuary homes across India</span>
+        <h1>Your next favourite place is waiting.</h1>
+        <p class="lead">From quiet countryside escapes to vibrant city stays, discover spaces that make every journey memorable. Every home is checked in person before it goes live.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#stays">Explore stays →</a>
+          <a class="btn btn-ghost" href="#destinations">Browse regions</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>3,840+</b><span>verified stays</span></div>
+          <div><b>4.9 ★</b><span>average guest rating</span></div>
+          <div><b>24/7</b><span>Indian concierge</span></div>
+        </div>
+      </div>
+
+      <div class="signup" id="signup">
+        <div id="signupForm-wrap">
+          <h2 id="signupTitle">Join CozyNest</h2>
+          <p id="signupIntro">Enter your details to sign in and book your stay.</p>
+          <form id="signupForm" novalidate>
+            <div class="field" id="f-name">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Arjun Mehta" required>
+              <span class="err">Please enter your name.</span>
+            </div>
+            <div class="field" id="f-email">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              <span class="err">Please enter a valid email address.</span>
+            </div>
+            <div class="field" id="f-phone">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210" required>
+              <span class="err">Please enter a valid phone number.</span>
+            </div>
+            <button class="btn btn-primary" type="submit" id="sendBtn">Continue</button>
+            <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="fine">By continuing you agree to our Terms and Privacy Policy.</p>
+          </form>
+        </div>
+        <div class="signed" id="signedPanel">
+          <div class="signed-in-msg">
+            <b id="welcomeName">Welcome!</b>
+            <span>You're signed in. Choose a stay below to book it.</span>
+          </div>
+          <div class="row2" style="margin-top:14px">
+            <a class="btn btn-primary" href="#stays">Browse stays</a>
+            <button class="btn btn-ghost" type="button" id="signOutBtn">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="search" role="search" aria-label="Find a stay">
+      <div><small>Where</small><span>Anywhere in India</span></div>
+      <div><small>When</small><span>Any week</span></div>
+      <div><small>Who</small><span>Add guests</span></div>
+      <a class="btn btn-primary" href="#stays">Search</a>
+    </div>
+    <div class="chips" role="group" aria-label="Categories">
+      <button class="chip" type="button" aria-pressed="true">Iconic cities</button>
+      <button class="chip" type="button" aria-pressed="false">Beachfront</button>
+      <button class="chip" type="button" aria-pressed="false">Hill cottages</button>
+      <button class="chip" type="button" aria-pressed="false">Heritage havelis</button>
+      <button class="chip" type="button" aria-pressed="false">Tea estates</button>
+      <button class="chip" type="button" aria-pressed="false">Desert camps</button>
+      <button class="chip" type="button" aria-pressed="false">Pool villas</button>
+      <button class="chip" type="button" aria-pressed="false">Treehouses</button>
+    </div>
+  </div>
+
+  <section class="block" id="stays">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="eyebrow">Curated private escapes</span><h2 class="sec">Stay somewhere extraordinary</h2></div>
+        <p>Showing 8 of 3,840 verified stays. Sorted by guest rating.</p>
+      </div>
+      <div class="stays" id="stayGrid">
+        <article class="stay" data-property="The Glass House on Mandovi River" data-price="14500">
+          <div class="pic"><img src="assets/stay-1.jpg" alt="The Glass House on Mandovi River" onerror="this.remove()"><span class="tag">Guest favourite</span><button class="save" type="button" aria-pressed="false" aria-label="Save The Glass House">♡</button></div>
+          <div class="body"><div class="row"><span>Candolim, Goa</span><span>★ 4.96 (128)</span></div><h3>The Glass House on Mandovi River</h3><p>Superhost Kabir · Riverfront lawn</p><div class="foot"><span class="price"><b>₹14,500</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Nilgiri Cloud Sanctuary &amp; Tea Attic" data-price="9800">
+          <div class="pic b"><img src="assets/stay-2.jpg" alt="Nilgiri Cloud Sanctuary and Tea Attic" onerror="this.remove()"><span class="tag">Guest favourite</span><button class="save" type="button" aria-pressed="false" aria-label="Save Nilgiri Cloud Sanctuary">♡</button></div>
+          <div class="body"><div class="row"><span>Ooty, Tamil Nadu</span><span>★ 4.98 (214)</span></div><h3>Nilgiri Cloud Sanctuary &amp; Tea Attic</h3><p>Superhost Ananya · Mountain &amp; mist view</p><div class="foot"><span class="price"><b>₹9,800</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Spice Garden Stone Villa &amp; Plunge Pool" data-price="11200">
+          <div class="pic c"><img src="assets/stay-3.jpg" alt="Spice Garden Stone Villa" onerror="this.remove()"><button class="save" type="button" aria-pressed="false" aria-label="Save Spice Garden Stone Villa">♡</button></div>
+          <div class="body"><div class="row"><span>Munnar, Kerala</span><span>★ 4.92 (95)</span></div><h3>Spice Garden Stone Villa &amp; Plunge Pool</h3><p>Host Mathew · Private organic garden</p><div class="foot"><span class="price"><b>₹11,200</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Haveli Chandrabhaga 18th Century Suite" data-price="18000">
+          <div class="pic d"><img src="assets/stay-4.jpg" alt="Haveli Chandrabhaga suite" onerror="this.remove()"><span class="tag">Rare find</span><button class="save" type="button" aria-pressed="false" aria-label="Save Haveli Chandrabhaga">♡</button></div>
+          <div class="body"><div class="row"><span>Jaipur, Rajasthan</span><span>★ 4.97 (340)</span></div><h3>Haveli Chandrabhaga 18th Century Suite</h3><p>Heritage host Vikram · Private courtyard</p><div class="foot"><span class="price"><b>₹18,000</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Fateh Sagar Waterfront Mewar Suite" data-price="22500">
+          <div class="pic"><img src="assets/stay-5.jpg" alt="Fateh Sagar Waterfront suite" onerror="this.remove()"><button class="save" type="button" aria-pressed="false" aria-label="Save Fateh Sagar suite">♡</button></div>
+          <div class="body"><div class="row"><span>Udaipur, Rajasthan</span><span>★ 4.95 (182)</span></div><h3>Fateh Sagar Waterfront Mewar Suite</h3><p>Host Priya · Private boat transfer</p><div class="foot"><span class="price"><b>₹22,500</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="French Quarter Colonial Veranda Villa" data-price="8900">
+          <div class="pic b"><img src="assets/stay-6.jpg" alt="French Quarter veranda villa" onerror="this.remove()"><button class="save" type="button" aria-pressed="false" aria-label="Save French Quarter villa">♡</button></div>
+          <div class="body"><div class="row"><span>White Town, Pondicherry</span><span>★ 4.91 (160)</span></div><h3>French Quarter Colonial Veranda Villa</h3><p>Host Claire &amp; Jean · 200m to the promenade</p><div class="foot"><span class="price"><b>₹8,900</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Himalayan Cedar Log Cabin" data-price="12400">
+          <div class="pic c"><img src="assets/stay-7.jpg" alt="Himalayan cedar log cabin" onerror="this.remove()"><button class="save" type="button" aria-pressed="false" aria-label="Save Himalayan Cedar Log Cabin">♡</button></div>
+          <div class="body"><div class="row"><span>Manali, Himachal Pradesh</span><span>★ 4.99 (88)</span></div><h3>Himalayan Cedar Log Cabin</h3><p>Superhost Tenzin · Cast iron fireplace</p><div class="foot"><span class="price"><b>₹12,400</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+        <article class="stay" data-property="Thar Desert Starlit Luxury Camp" data-price="7500">
+          <div class="pic d"><img src="assets/stay-8.jpg" alt="Thar Desert luxury camp" onerror="this.remove()"><button class="save" type="button" aria-pressed="false" aria-label="Save Thar Desert camp">♡</button></div>
+          <div class="body"><div class="row"><span>Jaisalmer, Rajasthan</span><span>★ 4.89 (74)</span></div><h3>Thar Desert Starlit Luxury Camp</h3><p>Host Rawal · Stargazing dune safari</p><div class="foot"><span class="price"><b>₹7,500</b> / night</span><button class="btn btn-primary btn-sm reserve" type="button">Reserve</button></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="destinations" style="padding-top:8px">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="eyebrow">Geographic escapes</span><h2 class="sec">Explore top Indian destinations</h2></div>
+        <p>Immerse yourself in distinct micro-climates, culinary traditions and heritage architecture across the subcontinent.</p>
+      </div>
+      <div class="dests">
+        <a class="dest" href="#stays"><div><b>Goa</b><small>1,420 private stays</small></div></a>
+        <a class="dest" href="#stays"><div><b>Ooty</b><small>430 hill cottages</small></div></a>
+        <a class="dest" href="#stays"><div><b>Munnar</b><small>380 tea villas</small></div></a>
+        <a class="dest" href="#stays"><div><b>Jaipur</b><small>890 havelis</small></div></a>
+        <a class="dest" href="#stays"><div><b>Udaipur</b><small>510 lake suites</small></div></a>
+        <a class="dest" href="#stays"><div><b>Pondicherry</b><small>320 villas</small></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="guarantee" style="padding-top:8px">
+    <div class="wrap">
+      <div class="head" style="justify-content:center;text-align:center">
+        <div style="width:100%"><span class="eyebrow" style="justify-content:center">Hospitality standards</span><h2 class="sec">The CozyNest Sanctuary Guarantee</h2></div>
+        <p style="margin:0 auto;text-align:center">Every booking is protected by industry-leading standards designed for private villa stays across India.</p>
+      </div>
+      <div class="guar">
+        <div class="g-card"><div class="g-ic">✔</div><h3>Verified stays by curators</h3><p>Every villa undergoes an in-person 100-point inspection covering hygiene, Wi-Fi speed, generator backup and linen thread-counts before it is published.</p></div>
+        <div class="g-card"><div class="g-ic">🛡</div><h3>NestCover 100% protection</h3><p>Free rebooking if check-in fails, listing discrepancy protection and round-the-clock medical or property emergency assistance.</p></div>
+        <div class="g-card"><div class="g-ic">☎</div><h3>24/7 concierge in 6 languages</h3><p>Dedicated travel advisors fluent in Hindi, English, Tamil, Malayalam, Bengali and Marathi for local chef bookings and transfers.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="host" style="padding-top:8px">
+    <div class="wrap">
+      <div class="host">
+        <div>
+          <span class="eyebrow" style="color:#bfe3cd">Host community</span>
+          <h2>Earn up to ₹85,000 a month hosting your home</h2>
+          <p>Join 12,000+ homeowners across India who share their ancestral havelis, plantation cottages and seaside villas with respectful travellers.</p>
+          <a class="btn" href="#signup">Become a host</a>
+        </div>
+        <div class="earn">
+          <small>Estimated 7-night booking</small>
+          <b>₹85,400</b>
+          <div class="bar" aria-hidden="true"><span></span></div>
+          <p class="muted" style="margin:10px 0 0;font-size:14px">Based on a 2-bedroom villa in Goa or Ooty. Average ₹12,200 per night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div><h5>Support</h5><a href="#">Help Center</a><a href="#">NestCover Protection</a><a href="#">Cancellation options</a><a href="#">Safety guidelines</a></div>
+      <div><h5>Community</h5><a href="#">CozyNest Disaster relief</a><a href="#">Combating discrimination</a><a href="#">Guest stories</a></div>
+      <div><h5>Hosting</h5><a href="#">Host your home</a><a href="#">NestCover for Hosts</a><a href="#">Hosting resources</a><a href="#">Community forum</a></div>
+      <div><h5>CozyNest</h5><a href="#">Newsroom</a><a href="#">New features</a><a href="#">Careers</a><a href="#">Investors</a><a href="#">Gift cards</a></div>
+    </div>
+    <div class="legal"><span>© 2025 CozyNest, Inc.</span><span>Privacy · Terms · Sitemap · Company details · ₹ INR</span></div>
+  </div>
+</footer>
+
+<!-- Booking dialog: only for signed-in guests -->
+<dialog id="bookDlg" aria-labelledby="bookTitle">
+  <form id="bookForm" class="dlg" novalidate>
+    <h2 id="bookTitle">Book your stay</h2>
+    <p id="bookProperty"></p>
+    <div class="row2">
+      <div class="field" id="f-in">
+        <label for="checkIn">Check-in</label>
+        <input id="checkIn" name="checkIn" type="date" required>
+        <span class="err">Choose a check-in date.</span>
+      </div>
+      <div class="field" id="f-out">
+        <label for="checkOut">Check-out</label>
+        <input id="checkOut" name="checkOut" type="date" required>
+        <span class="err">Choose a date after check-in.</span>
+      </div>
+    </div>
+    <div class="field" id="f-guests">
+      <label for="guests">Guests</label>
+      <select id="guests" name="guests">
+        <option value="1">1 guest</option>
+        <option value="2" selected>2 guests</option>
+        <option value="3">3 guests</option>
+        <option value="4">4 guests</option>
+        <option value="6">6 guests</option>
+        <option value="8">8 guests</option>
+      </select>
+    </div>
+    <div class="summary" id="bookSummary"></div>
+    <div class="row">
+      <button class="btn btn-ghost btn-sm" type="button" id="bookCancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" type="submit" id="bookConfirm">Confirm booking</button>
+    </div>
+    <p class="status" id="bookStatus" role="status" aria-live="polite"></p>
+    <p class="ref" id="bookRef"></p>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3d8IONOncpv18DD8aiN1ed6XyTdzKBkkFuBmCjBbT-L_2HE4lwn4mnGKP_uJoyRVe/exec";
+  var KEY = "cozynest_user";
+
+  function loadUser() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; }
+  }
+  function saveUser(u) {
+    try { localStorage.setItem(KEY, JSON.stringify(u)); } catch (e) {}
+  }
+  function clearUser() {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+  }
+  function sendToSheet(type, fields) {
+    var params = new URLSearchParams(Object.assign({ type: type }, fields));
+    return fetch(SCRIPT_URL + "?" + params.toString(), { method: "GET", mode: "no-cors" });
+  }
+  function showSuccess(el, msg) { el.className = "status ok"; el.textContent = msg; }
+  function showError(el, msg) { el.className = "status fail"; el.textContent = msg; }
+  function setBad(id, bad) { document.getElementById(id).classList.toggle("bad", bad); }
+
+  var user = loadUser();
+  var whoLabel = document.getElementById("whoLabel");
+  var joinLink = document.getElementById("joinLink");
+  var signupWrap = document.getElementById("signupForm-wrap");
+  var signedPanel = document.getElementById("signedPanel");
+
+  function renderAuth() {
+    if (user) {
+      whoLabel.textContent = "Hi, " + user.name.split(" ")[0];
+      joinLink.textContent = "My account";
+      joinLink.setAttribute("href", "#signup");
+      signupWrap.style.display = "none";
+      signedPanel.classList.add("on");
+      document.getElementById("welcomeName").textContent = "Welcome, " + user.name + "!";
+    } else {
+      whoLabel.textContent = "";
+      joinLink.textContent = "Sign in";
+      signupWrap.style.display = "";
+      signedPanel.classList.remove("on");
+    }
+  }
+  renderAuth();
+
+  // Sign in / sign up: saves the guest in the Responses tab
+  var form = document.getElementById("signupForm");
+  var status = document.getElementById("formStatus");
+  var sendBtn = document.getElementById("sendBtn");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("name").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var okName = name.length > 0;
+    var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    var okPhone = /^[+]?[0-9\s()-]{7,20}$/.test(phone);
+    setBad("f-name", !okName); setBad("f-email", !okEmail); setBad("f-phone", !okPhone);
+    if (!okName || !okEmail || !okPhone) { status.textContent = ""; return; }
+
+    sendBtn.disabled = true;
+    status.className = "status"; status.textContent = "Signing you in…";
+    sendToSheet("responses", { name: name, email: email, phone: phone })
+      .then(function () {
+        user = { name: name, email: email, phone: phone };
+        saveUser(user);
+        renderAuth();
+        form.reset();
+        sendBtn.disabled = false;
+        status.textContent = "";
+        if (pendingProperty) openBooking(pendingProperty);
+      })
+      .catch(function () {
+        showError(status, "Something went wrong. Please try again.");
+        sendBtn.disabled = false;
+      });
+  });
+
+  document.getElementById("signOutBtn").addEventListener("click", function () {
+    clearUser(); user = null; renderAuth();
+  });
+
+  // Booking
+  var pendingProperty = null;
+  var bookDlg = document.getElementById("bookDlg");
+  var bookForm = document.getElementById("bookForm");
+  var bookStatus = document.getElementById("bookStatus");
+  var bookConfirm = document.getElementById("bookConfirm");
+  var bookRef = document.getElementById("bookRef");
+  var currentStay = null;
+
+  function nights() {
+    var a = document.getElementById("checkIn").value;
+    var b = document.getElementById("checkOut").value;
+    if (!a || !b) return 0;
+    var d = (new Date(b) - new Date(a)) / 86400000;
+    return d > 0 ? d : 0;
+  }
+  function refreshSummary() {
+    var n = nights();
+    var g = document.getElementById("guests").value;
+    var total = n * currentStay.price;
+    document.getElementById("bookSummary").innerHTML = n
+      ? "<b>" + n + " night" + (n > 1 ? "s" : "") + "</b> · " + g + " guest" + (g > 1 ? "s" : "") +
+        "<br><b>Total: ₹" + total.toLocaleString("en-IN") + "</b> (before taxes and fees)"
+      : "Choose your dates to see the total.";
+  }
+
+  function openBooking(stay) {
+    pendingProperty = null;
+    currentStay = stay;
+    bookForm.reset();
+    bookStatus.textContent = ""; bookRef.textContent = "";
+    bookConfirm.disabled = false;
+    document.getElementById("bookProperty").textContent = stay.name + " · ₹" + stay.price.toLocaleString("en-IN") + " / night";
+    var today = new Date().toISOString().slice(0, 10);
+    document.getElementById("checkIn").min = today;
+    document.getElementById("checkOut").min = today;
+    refreshSummary();
+    bookDlg.showModal();
+  }
+
+  ["checkIn", "checkOut", "guests"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", refreshSummary);
+  });
+  document.getElementById("bookCancel").addEventListener("click", function () { bookDlg.close(); });
+
+  document.querySelectorAll(".reserve").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var card = btn.closest(".stay");
+      var stay = { name: card.getAttribute("data-property").replace(/&amp;/g, "&"),
+                   price: parseInt(card.getAttribute("data-price"), 10) };
+      if (!user) {
+        pendingProperty = stay;
+        status.textContent = "Sign in to book " + stay.name + ".";
+        document.getElementById("signup").scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById("name").focus();
+        return;
+      }
+      openBooking(stay);
+    });
+  });
+
+  bookForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var ci = document.getElementById("checkIn").value;
+    var co = document.getElementById("checkOut").value;
+    var okIn = !!ci;
+    var okOut = !!co && nights() > 0;
+    setBad("f-in", !okIn); setBad("f-out", !okOut);
+    if (!okIn || !okOut) return;
+
+    var n = nights();
+    var g = document.getElementById("guests").value;
+    var total = n * currentStay.price;
+    var ref = "CN-" + Date.now().toString(36).toUpperCase();
+
+    bookConfirm.disabled = true;
+    bookStatus.className = "status"; bookStatus.textContent = "Booking…";
+    sendToSheet("bookings", {
+      ref: ref, name: user.name, email: user.email, phone: user.phone,
+      property: currentStay.name, checkIn: ci, checkOut: co, guests: g,
+      total: "INR " + total
+    }).then(function () {
+      showSuccess(bookStatus, "Booking requested! We'll confirm it by email shortly.");
+      bookRef.textContent = "Reference: " + ref;
+      bookConfirm.disabled = false;
+    }).catch(function () {
+      showError(bookStatus, "Something went wrong. Please try again.");
+      bookConfirm.disabled = false;
+    });
+  });
+
+  // Small UI bits
+  var menuBtn = document.getElementById("menuBtn");
+  var nav = document.getElementById("mainNav");
+  menuBtn.addEventListener("click", function () {
+    var open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () { nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); });
+  });
+  document.querySelectorAll(".chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      document.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      c.setAttribute("aria-pressed", "true");
+    });
+  });
+  document.querySelectorAll(".save").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var on = b.getAttribute("aria-pressed") !== "true";
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.textContent = on ? "♥" : "♡";
+    });
+  });
+  document.querySelectorAll('a[href="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); });
+  });
+})();
+</script>
+</body>
+</html>
